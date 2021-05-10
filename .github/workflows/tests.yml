@@ -1,0 +1,20 @@
+name: Tests
+
+on:
+  push
+
+jobs:
+  navigation-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run tests
+        run: yarn test Navigation
