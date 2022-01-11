@@ -1,8 +1,8 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {Button, View} from 'react-native';
-import {act, fireEvent, render} from '@testing-library/react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button, View } from 'react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
@@ -12,7 +12,7 @@ it('just succeed', () => {
 
 const ScreenFactory =
   screenName =>
-  ({navigation}) => {
+  ({ navigation }) => {
     return (
       <View>
         <Button
@@ -28,7 +28,7 @@ const ScreenFactory =
 const ScreenA = ScreenFactory('Screen B');
 const ScreenB = ScreenFactory('Screen A');
 
-const {Screen, Navigator} = createStackNavigator();
+const { Screen, Navigator } = createStackNavigator();
 
 const App = () => {
   return (
@@ -45,7 +45,7 @@ jest.useFakeTimers();
 
 describe('Navigation Container', () => {
   it('run test without importing a file after it', async () => {
-    const {getByText} = render(<App />);
+    const { getByText } = render(<App />);
     act(() => jest.runAllTimers());
 
     getByText('Go to Screen B');
