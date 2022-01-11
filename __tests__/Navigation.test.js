@@ -10,18 +10,20 @@ it('just succeed', () => {
   expect(true).toBe(true);
 });
 
-const ScreenFactory = (screenName) => ({ navigation }) => {
-  return (
-    <View>
-      <Button
-        title={`Go to ${screenName}`}
-        onPress={() => {
-          navigation.navigate(screenName);
-        }}
-      />
-    </View>
-  );
-};
+const ScreenFactory =
+  screenName =>
+  ({ navigation }) => {
+    return (
+      <View>
+        <Button
+          title={`Go to ${screenName}`}
+          onPress={() => {
+            navigation.navigate(screenName);
+          }}
+        />
+      </View>
+    );
+  };
 
 const ScreenA = ScreenFactory('Screen B');
 const ScreenB = ScreenFactory('Screen A');
@@ -39,10 +41,12 @@ const App = () => {
   );
 };
 
+jest.useFakeTimers();
+
 describe('Navigation Container', () => {
   it('run test without importing a file after it', async () => {
     const { getByText } = render(<App />);
-    await act(async () => {});
+    act(() => jest.runAllTimers());
 
     getByText('Go to Screen B');
   });
